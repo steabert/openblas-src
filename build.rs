@@ -17,12 +17,14 @@ fn main() {
     if !feature!("SYSTEM") {
         let cblas = feature!("CBLAS");
         let lapacke = feature!("LAPACKE");
+        let ilp64 = binary!() == "64" && feature!("ILP64");
         let output = PathBuf::from(variable!("OUT_DIR").replace(r"\", "/"));
         let mut make = Command::new("make");
         make.args(&["libs", "netlib", "shared"])
             .arg(format!("BINARY={}", binary!()))
             .arg(format!("{}_CBLAS=1", switch!(cblas)))
             .arg(format!("{}_LAPACKE=1", switch!(lapacke)))
+            .arg(format!("INTERFACE64={}", if ilp64 {'1'} else {'0'}))
             .arg(format!("-j{}", variable!("NUM_JOBS")));
         let target = match env::var("OPENBLAS_TARGET") {
             Ok(target) => {

@@ -11,6 +11,9 @@ The following Cargo features are supported:
 * `lapacke` to build LAPACKE (enabled by default),
 * `static` to link to OpenBLAS statically, and
 * `system` to skip building the bundled OpenBLAS.
+* `ilp64` to use 64-bit integers for the interface
+  (commonly referred to as ilp64: 64-bit integer, long, and pointer,
+  as apposed to lp64: 64-bit long and pointer, but 32-bit integer).
 
 ## Caching
 
